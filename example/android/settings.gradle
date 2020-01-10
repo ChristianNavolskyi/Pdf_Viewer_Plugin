@@ -1,4 +1,4 @@
-include ':app'
+include ':app', ':android-pdf-viewer-release'
 
 def flutterProjectRoot = rootProject.projectDir.parentFile.toPath()
 

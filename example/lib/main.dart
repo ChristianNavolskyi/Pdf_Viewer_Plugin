@@ -58,6 +58,13 @@ class _MyAppState extends State<MyApp> {
     setState(() {});
   }
 
+  double _zoom;
+  void zoomChanged(double zoom) {
+    setState(() {
+      _zoom = zoom;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -70,15 +77,16 @@ class _MyAppState extends State<MyApp> {
             children: <Widget>[
               if (path != null)
                 Container(
-                  height: 300.0,
+                  height: 700,
                   child: PdfViewer(
                     filePath: path,
+                    onZoomLevelChanged: zoomChanged,
                   ),
                 )
               else
                 Text("Pdf is not Loaded"),
               RaisedButton(
-                child: Text("Load pdf"),
+                child: Text("Load pdf" + _zoom.toString()),
                 onPressed: loadPdf,
               ),
             ],
