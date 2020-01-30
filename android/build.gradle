@@ -2,6 +2,7 @@ group 'com.example.pdfviewerplugin'
 version '1.0-SNAPSHOT'
 buildscript {
     repositories {
+        mavenLocal()
         google()
         jcenter()
     }
@@ -21,7 +22,7 @@ android {
     compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 19
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
@@ -30,6 +31,6 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.0.0'
-    implementation project(':android-pdf-viewer-release')
+	implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'com.github.barteksc:android-pdf-viewer:3.2.0-beta.1'
 }

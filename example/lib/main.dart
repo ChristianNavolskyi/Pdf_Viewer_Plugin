@@ -59,10 +59,16 @@ class _MyAppState extends State<MyApp> {
   }
 
   double _zoom;
+  Size _currentPdfSize;
+
   void zoomChanged(double zoom) {
     setState(() {
       _zoom = zoom;
     });
+  }
+
+  void sizeChanged(Size size) {
+    _currentPdfSize = size;
   }
 
   @override
@@ -73,21 +79,31 @@ class _MyAppState extends State<MyApp> {
           title: Text('Plugin example app'),
         ),
         body: Center(
-          child: Column(
+          child: Stack(
             children: <Widget>[
               if (path != null)
                 Container(
                   height: 700,
                   child: PdfViewer(
                     filePath: path,
+                    onPdfViewerCreated: (int id) => null,
                     onZoomLevelChanged: zoomChanged,
+                    onSizeChanged: sizeChanged,
                   ),
                 )
               else
                 Text("Pdf is not Loaded"),
               RaisedButton(
-                child: Text("Load pdf" + _zoom.toString()),
+                child: Text("Load pdf"),
                 onPressed: loadPdf,
+              ),
+              Positioned(bottom: 10,
+                  left: 10,
+                  child: Text("Zoom Level: " + _zoom.toString())
+              ),
+              Positioned(bottom: 30,
+                  left: 10,
+                  child: Text("Size: " + _currentPdfSize.toString())
               ),
             ],
           ),
